@@ -15,49 +15,25 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export const Cards = () => {
+export const Cards = (props) => {
+  const { statues } = props;
+  //受け取ったjsonデータから必要な情報だけ配列に格納する⇨map関数を使って１つずつ取り出す。
   const classes = useStyle();
-
-  const statues = [
-    {
-      winCount: 300,
-    },
-    { victoryCount: 34 },
-  ];
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3} className={classes.grid}>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>
-            <Typography>win_count</Typography>
-            <Typography style={{ fontSize: 30 }}>300</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3} className={classes.grid}>
-          <Paper className={classes.paper}>
-            <Typography>win_count</Typography>
-            <Typography style={{ fontSize: 30 }}>34</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3} className={classes.grid}>
-          <Paper className={classes.paper}>
-            <Typography>win_count</Typography>
-            <Typography style={{ fontSize: 30 }}>34</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3} className={classes.grid}>
-          <Paper className={classes.paper}>
-            <Typography>win_count</Typography>
-            <Typography style={{ fontSize: 30 }}>34</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3} className={classes.grid}>
-          <Paper className={classes.paper}>
-            <Typography>win_count</Typography>
-            <Typography style={{ fontSize: 30 }}>34</Typography>
-          </Paper>
-        </Grid>
+        {statues &&
+          statues.map((status) => (
+            <Grid item xs={12} sm={3} key={status.id}>
+              <Paper className={classes.paper}>
+                <Typography>{status.name}</Typography>
+                <Typography style={{ fontSize: 30 }}>
+                  {status.number}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
       </Grid>
     </div>
   );

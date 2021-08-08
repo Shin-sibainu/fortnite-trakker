@@ -29,7 +29,7 @@ export const Header = () => {
       <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <Typography variant="h1" className={classes.title}>
-            Fortnite Trakker
+            Fortnite Tracker
           </Typography>
           <Button color="inherit" style={{ fontSize: 17 }}>
             Github

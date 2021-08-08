@@ -15,7 +15,7 @@ export const Title = () => {
   return (
     <div className="title">
       <Typography variant="h2" className={classes.titleName}>
-        Trake players Status...
+        Track Fortnite Status...
       </Typography>
     </div>
   );
