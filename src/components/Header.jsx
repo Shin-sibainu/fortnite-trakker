@@ -31,10 +31,18 @@ export const Header = () => {
           <Typography variant="h1" className={classes.title}>
             Fortnite Tracker
           </Typography>
-          <Button color="inherit" style={{ fontSize: 17 }}>
+          <Button
+            color="inherit"
+            style={{ fontSize: 17 }}
+            href="https://github.com/Shin-sibainu/fortnite-trakker"
+          >
             Github
           </Button>
-          <Button color="inherit" style={{ fontSize: 17 }}>
+          <Button
+            color="inherit"
+            style={{ fontSize: 17 }}
+            href="https://twitter.com/Shin_Engineer"
+          >
             Twitter
           </Button>
         </Toolbar>

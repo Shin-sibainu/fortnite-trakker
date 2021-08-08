@@ -3,7 +3,12 @@ import React from "react";
 import { Title } from "./title/Title";
 import { useState } from "react";
 //import { UseFetch } from "./utils/UseFetch";
-import { Input, makeStyles } from "@material-ui/core";
+import {
+  CircularProgress,
+  Input,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -19,10 +24,15 @@ const useStyle = makeStyles((theme) => ({
     width: "420px",
     height: "40px",
   },
+  progress: {
+    textAlign: "center",
+  },
 }));
 export const Main = () => {
   const classes = useStyle();
   const [inputText, setInputText] = useState("");
+  const [isPending, setPending] = useState(false);
+  const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
   const handleChange = (e) => {
@@ -30,11 +40,14 @@ export const Main = () => {
   };
 
   const handleSubmit = (e) => {
+    setError(null);
+    setPending(true);
+    setData(null);
     e.preventDefault();
     console.log(inputText);
     //fetch here
     //この情報をカードの方に持っていきたい。
-    fetch("https://fortnite-api.p.rapidapi.com/stats/zRotation", {
+    fetch(`https://fortnite-api.p.rapidapi.com/stats/${inputText}`, {
       method: "GET",
       headers: {
         "x-rapidapi-key": "5d9f005d9cmsh913c00abd95dcc3p1ef35ejsn4f0c3ce61d03",
@@ -104,7 +117,20 @@ export const Main = () => {
             number: defalutsoloData.winrate,
           },
         ];
+        setPending(false);
         setData(statues);
+        setError(null);
+      })
+      .catch((error) => {
+        setPending(false);
+        setData(null);
+        if (error.message === "Cannot read property 'all' of undefined") {
+          setError("The player does not exit.");
+        }
+        if (error.message === "Cannot read property 'kdr' of undefined") {
+          setError("Failed to get data. Reload this page.");
+        }
+        console.log(error.message);
       });
   };
 
@@ -130,8 +156,21 @@ export const Main = () => {
         </div>
       </div>
       {data && (
-        <div style={{ textAlign: "center", fontSize: 25 }}>
-          Your Status Result
+        <div style={{ textAlign: "center", fontSize: 25 }}>Status Result</div>
+      )}
+      {isPending && (
+        <div className={classes.progress}>
+          <CircularProgress style={{ fontSize: 20, marginTop: "22px" }} />
+        </div>
+      )}
+      {error && (
+        <div
+          className={classes.progress}
+          style={{ fontSize: 20, marginTop: "22px" }}
+        >
+          <Typography variant="h4" style={{ marginBottom: "12px" }}>
+            {error}
+          </Typography>
         </div>
       )}
       <div className="cardArea">
