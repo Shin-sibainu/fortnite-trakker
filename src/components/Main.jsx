@@ -15,12 +15,18 @@ const useStyle = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(6),
   },
+  titleInputArea: {
+    textAlign: "center",
+    marginTop: theme.spacing(5),
+  },
   titleName: {
+    fontFamily: "Anton",
     textAlign: "center",
     marginTop: theme.spacing(5),
     fontSize: "60px",
   },
   input: {
+    fontFamily: "Anton",
     width: "420px",
     height: "40px",
   },
@@ -130,13 +136,16 @@ export const Main = () => {
         if (error.message === "Cannot read property 'kdr' of undefined") {
           setError("Failed to get data. Reload this page.");
         }
+        if (error.message === "Failed to fetch") {
+          setError("Network Error.Please try again.");
+        }
         console.log(error.message);
       });
   };
 
   return (
-    <div className="main">
-      <div className="title-input-area" style={{ textAlign: "center" }}>
+    <div className="main-for-background">
+      <div className={classes.titleInputArea}>
         <Title />
         <div className="input">
           <form
@@ -156,7 +165,9 @@ export const Main = () => {
         </div>
       </div>
       {data && (
-        <div style={{ textAlign: "center", fontSize: 25 }}>Status Result</div>
+        <div style={{ textAlign: "center", fontSize: 25, fontFamily: "Anton" }}>
+          Status Result
+        </div>
       )}
       {isPending && (
         <div className={classes.progress}>
@@ -166,9 +177,12 @@ export const Main = () => {
       {error && (
         <div
           className={classes.progress}
-          style={{ fontSize: 20, marginTop: "22px" }}
+          style={{ fontSize: 20, marginTop: "22px", fontFamily: "Anton" }}
         >
-          <Typography variant="h4" style={{ marginBottom: "12px" }}>
+          <Typography
+            variant="h4"
+            style={{ marginBottom: "12px", fontFamily: "Anton" }}
+          >
             {error}
           </Typography>
         </div>

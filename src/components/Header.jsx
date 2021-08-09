@@ -13,9 +13,12 @@ const useStyle = makeStyles((theme) => ({
   },
   appBar: {
     padding: theme.spacing(1),
-    background: "black",
+    background: "#39284f",
+    marginBottom: theme.spacing(13),
   },
   title: {
+    fontFamily: "Anton",
+
     fontSize: "34px",
     flexGrow: 1,
     marginLeft: theme.spacing(3),
@@ -33,14 +36,14 @@ export const Header = () => {
           </Typography>
           <Button
             color="inherit"
-            style={{ fontSize: 17 }}
+            style={{ fontSize: 17, fontFamily: "Anton" }}
             href="https://github.com/Shin-sibainu/fortnite-trakker"
           >
             Github
           </Button>
           <Button
             color="inherit"
-            style={{ fontSize: 17 }}
+            style={{ fontSize: 17, fontFamily: "Anton" }}
             href="https://twitter.com/Shin_Engineer"
           >
             Twitter

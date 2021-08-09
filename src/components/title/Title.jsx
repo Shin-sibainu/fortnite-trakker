@@ -4,6 +4,7 @@ import React from "react";
 const useStyle = makeStyles((theme) => ({
   title: {},
   titleName: {
+    fontFamily: "Anton",
     textAlign: "center",
     marginTop: theme.spacing(5),
     fontSize: "60px",

@@ -27,8 +27,8 @@ export const Cards = (props) => {
           statues.map((status) => (
             <Grid item xs={12} sm={3} key={status.id}>
               <Paper className={classes.paper}>
-                <Typography>{status.name}</Typography>
-                <Typography style={{ fontSize: 30 }}>
+                <Typography style={{}}>{status.name}</Typography>
+                <Typography style={{ fontSize: 30, fontFamily: "Anton" }}>
                   {status.number}
                 </Typography>
               </Paper>
