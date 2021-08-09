@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
 
 export const UseFetch = (inputText) => {
   //const [inputText, setInputText] = useState("");
@@ -102,3 +102,4 @@ export const UseFetch = (inputText) => {
   }, [data]); //submitしたときのテキスト情報が更新されたときにuseEffect内部が実行される。
   return { error, isPending, data };
 };
+ */
