@@ -1,61 +1,61 @@
-export const db = (defalutsoloData) => {
-  const data = [
+export const duoDB = (defalutDuoData) => {
+  const duoData = [
     {
       id: 1,
       name: "kdr",
-      number: defalutsoloData.kdr,
+      number: defalutDuoData.kdr,
     },
     {
       id: 2,
       name: "kills",
-      number: defalutsoloData.kills,
+      number: defalutDuoData.kills,
     },
     {
       id: 3,
       name: "killsPerMatch",
-      number: defalutsoloData.killsPerMatch,
+      number: defalutDuoData.killsPerMatch,
     },
     {
       id: 4,
       name: "matchesplayed",
-      number: defalutsoloData.matchesplayed,
+      number: defalutDuoData.matchesplayed,
     },
     {
       id: 5,
       name: "minutesplayed",
-      number: defalutsoloData.minutesplayed,
+      number: defalutDuoData.minutesplayed,
     },
     {
       id: 6,
       name: "placetop1",
-      number: defalutsoloData.placetop1,
+      number: defalutDuoData.placetop1,
     },
     {
       id: 7,
       name: "placetop10",
-      number: defalutsoloData.placetop10,
+      number: defalutDuoData.placetop10,
     },
     {
       id: 8,
       name: "placetop25",
-      number: defalutsoloData.placetop25,
+      number: defalutDuoData.placetop25,
     },
     {
       id: 9,
       name: "playersoutlived",
-      number: defalutsoloData.playersoutlived,
+      number: defalutDuoData.playersoutlived,
     },
     {
       id: 10,
       name: "score",
-      number: defalutsoloData.score,
+      number: defalutDuoData.score,
     },
     {
       id: 11,
       name: "winrate",
-      number: defalutsoloData.winrate,
+      number: defalutDuoData.winrate,
     },
   ];
 
-  return data;
+  return duoData;
 };

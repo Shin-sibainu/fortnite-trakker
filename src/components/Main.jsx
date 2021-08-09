@@ -9,7 +9,9 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { db } from "../data/db";
+import { soloDB } from "../data/soloDB";
+import { duoDB } from "../data/duoDB";
+import { squadDB } from "../data/squadDB";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -47,7 +49,15 @@ export const Main = () => {
   const [inputText, setInputText] = useState("");
   const [isPending, setPending] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+
+  const [soloData, setSoloData] = useState(null);
+  const [duoData, setDuoData] = useState(null);
+  const [squadData, setSquadData] = useState(null);
+
+  const [isSoloOpen, setSoloOpen] = useState(false);
+  const [isDuoOpen, setDuoOpen] = useState(false);
+  const [isSuqadOpen, setSquadOpen] = useState(false);
+
   const handleChange = (e) => {
     setInputText(e.target.value);
   };
@@ -55,9 +65,11 @@ export const Main = () => {
   const handleSubmit = (e) => {
     setError(null);
     setPending(true);
-    setData(null);
+    setSoloOpen(null);
+    setSoloData(null);
+
     e.preventDefault();
-    console.log(inputText);
+    //console.log(inputText);
     //fetch here
     //この情報をカードの方に持っていきたい。
     fetch(`https://fortnite-api.p.rapidapi.com/stats/${inputText}`, {
@@ -71,15 +83,29 @@ export const Main = () => {
         return response.json();
       })
       .then((data) => {
+        //console.log(data);
+        //ソロのデータ生成
         const defalutsoloData = data.lifetime.all.defaultsolo;
-        const statues = db(defalutsoloData);
+        const soloStatues = soloDB(defalutsoloData); //ここをリファクタした。
+        setSoloData(soloStatues); //soloのデータが入ってる。
+
+        //デュオのデータ生成。
+        const defalutDuoData = data.lifetime.all.defaultduo;
+        const duoStatues = duoDB(defalutDuoData); //ここをリファクタした。
+        setDuoData(duoStatues); //soloのデータが入ってる。
+
+        //スクワッドのデータ生成。
+        const defalutSquadData = data.lifetime.all.defaultsquad;
+        const squadStatues = squadDB(defalutSquadData); //ここをリファクタした。
+        setSquadData(squadStatues); //soloのデータが入ってる。
+
         setPending(false);
-        setData(statues);
         setError(null);
+        setSoloOpen(true); //デフォルトでソロが表示される
       })
       .catch((error) => {
         setPending(false);
-        setData(null);
+        setSoloData(null);
         if (error.message === "Cannot read property 'all' of undefined") {
           setError("The player does not exit.");
         }
@@ -91,6 +117,25 @@ export const Main = () => {
         }
         console.log(error.message);
       });
+  };
+
+  const handleSoloButton = () => {
+    //solo結果の画面を表示する。
+    setSoloOpen(true);
+    setDuoOpen(false);
+    setSquadOpen(false);
+  };
+  const handleDuoButton = () => {
+    //solo結果の画面を表示する。
+    setSoloOpen(false);
+    setDuoOpen(true);
+    setSquadOpen(false);
+  };
+  const handleSquadButton = () => {
+    //solo結果の画面を表示する。
+    setSoloOpen(false);
+    setDuoOpen(false);
+    setSquadOpen(true);
   };
 
   return (
@@ -114,20 +159,29 @@ export const Main = () => {
           </form>
         </div>
       </div>
-      {data && (
+      {soloData && (
         <div style={{ textAlign: "center", fontSize: 25, fontFamily: "Anton" }}>
           Status Result
         </div>
       )}
-      {data && (
+      {/* ------------タブ処理はここから-------------- */}
+      {/* ソロの画面 */}
+      {soloData && (
         <div className={classes.tabContainer}>
           <div className={classes.buttonFlex}>
-            <Button className={classes.soloButton}>Solo</Button>
-            <Button>Duo</Button>
-            <Button>Squid</Button>
+            <Button className={classes.soloButton} onClick={handleSoloButton}>
+              Solo
+            </Button>
+            <Button className={classes.duoButton} onClick={handleDuoButton}>
+              Duo
+            </Button>
+            <Button className={classes.squadButton} onClick={handleSquadButton}>
+              Squad
+            </Button>
           </div>
         </div>
       )}
+      {/* ------------タブ処理はここまで-------------- */}
       {isPending && (
         <div className={classes.progress}>
           <CircularProgress size={100} style={{ marginTop: "22px" }} />
@@ -147,8 +201,15 @@ export const Main = () => {
         </div>
       )}
       <div className="cardArea">
-        {/* inputされたらデータが渡される。 */}
-        <Cards statues={data} />
+        {/* submitされたらソロデータが渡される。 */}
+        <Cards
+          soloStatues={soloData}
+          duoStatues={duoData}
+          SquadStatues={squadData}
+          isSoloOpen={isSoloOpen}
+          isDuoOpen={isDuoOpen}
+          isSuqadOpen={isSuqadOpen}
+        />
       </div>
     </div>
   );

@@ -16,20 +16,49 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export const Cards = (props) => {
-  const { statues } = props;
+  const {
+    soloStatues,
+    duoStatues,
+    SquadStatues,
+    isSoloOpen,
+    isDuoOpen,
+    isSuqadOpen,
+  } = props;
   //受け取ったjsonデータから必要な情報だけ配列に格納する⇨map関数を使って１つずつ取り出す。
   const classes = useStyle();
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3} className={classes.grid}>
-        {statues &&
-          statues.map((status) => (
-            <Grid item xs={12} sm={3} key={status.id}>
+        {isSoloOpen &&
+          soloStatues.map((soloStatus) => (
+            <Grid item xs={12} sm={3} key={soloStatus.id}>
               <Paper className={classes.paper}>
-                <Typography style={{}}>{status.name}</Typography>
+                <Typography style={{}}>{soloStatus.name}</Typography>
                 <Typography style={{ fontSize: 30, fontFamily: "Anton" }}>
-                  {status.number}
+                  {soloStatus.number}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        {isDuoOpen &&
+          duoStatues.map((duostatus) => (
+            <Grid item xs={12} sm={3} key={duostatus.id}>
+              <Paper className={classes.paper}>
+                <Typography style={{}}>{duostatus.name}</Typography>
+                <Typography style={{ fontSize: 30, fontFamily: "Anton" }}>
+                  {duostatus.number}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        {isSuqadOpen &&
+          SquadStatues.map((squadStatus) => (
+            <Grid item xs={12} sm={3} key={squadStatus.id}>
+              <Paper className={classes.paper}>
+                <Typography style={{}}>{squadStatus.name}</Typography>
+                <Typography style={{ fontSize: 30, fontFamily: "Anton" }}>
+                  {squadStatus.number}
                 </Typography>
               </Paper>
             </Grid>
