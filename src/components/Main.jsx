@@ -2,6 +2,7 @@ import { Cards } from "./card/Cards";
 import React from "react";
 import { Title } from "./title/Title";
 import { useState } from "react";
+import { Button } from "@material-ui/core";
 //import { UseFetch } from "./utils/UseFetch";
 import {
   CircularProgress,
@@ -33,6 +34,13 @@ const useStyle = makeStyles((theme) => ({
   progress: {
     textAlign: "center",
   },
+  tabContainer: {
+    marginLeft: theme.spacing(14),
+  },
+  buttonFlex: {
+    display: "flex",
+  },
+  soloButton: {},
 }));
 export const Main = () => {
   const classes = useStyle();
@@ -134,7 +142,7 @@ export const Main = () => {
           setError("The player does not exit.");
         }
         if (error.message === "Cannot read property 'kdr' of undefined") {
-          setError("Failed to get data. Reload this page.");
+          setError("Failed to get data.Try again.");
         }
         if (error.message === "Failed to fetch") {
           setError("Network Error.Please try again.");
@@ -169,9 +177,18 @@ export const Main = () => {
           Status Result
         </div>
       )}
+      {data && (
+        <div className={classes.tabContainer}>
+          <div className={classes.buttonFlex}>
+            <Button className={classes.soloButton}>Solo</Button>
+            <Button>Duo</Button>
+            <Button>Squid</Button>
+          </div>
+        </div>
+      )}
       {isPending && (
         <div className={classes.progress}>
-          <CircularProgress style={{ fontSize: 20, marginTop: "22px" }} />
+          <CircularProgress size={100} style={{ marginTop: "22px" }} />
         </div>
       )}
       {error && (
