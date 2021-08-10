@@ -22,13 +22,6 @@ const useStyle = makeStyles((theme) => ({
   progress: {
     textAlign: "center",
   },
-  tabContainer: {
-    marginLeft: theme.spacing(14),
-  },
-  buttonFlex: {
-    display: "flex",
-  },
-  soloButton: {},
 }));
 export const Main = () => {
   const classes = useStyle();

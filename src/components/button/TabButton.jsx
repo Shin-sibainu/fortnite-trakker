@@ -2,26 +2,12 @@ import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
 
 const useStyle = makeStyles((theme) => ({
-  titleInputArea: {
-    textAlign: "center",
-    marginTop: theme.spacing(5),
-  },
-  titleName: {
-    fontFamily: "Anton",
-    textAlign: "center",
-    marginTop: theme.spacing(5),
-    fontSize: "60px",
-  },
-  progress: {
-    textAlign: "center",
-  },
   tabContainer: {
     marginLeft: theme.spacing(14),
   },
   buttonFlex: {
     display: "flex",
   },
-  soloButton: {},
 }));
 
 export const TabButton = ({ setSoloOpen, setDuoOpen, setSquadOpen }) => {
